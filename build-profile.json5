@@ -1,0 +1,53 @@
+{
+  "app": {
+    "signingConfigs": [
+      {
+        "name": "default",
+        "type": "HarmonyOS",
+        "material": {
+          "certpath": "C:\\Users\\Lenovo\\.ohos\\config\\default_SmartUtilsPro_zfjcTWix9MpsusUghDVoZvHUzpuNCx7Bz500pYm5af4=.cer",
+          "storePassword": "0000001B4F0EA88BB5CE91CEEA3BDA47A6C11C8BE09F09A4415EA92B62AD7469BE5AF438D80963AA11D5B3",
+          "keyAlias": "debugKey",
+          "keyPassword": "0000001B2395E4E9106725F3801AD574D772BD0426366CD660727FA6DEFC0B202B0AB637AAFB21C8CCB885",
+          "profile": "C:\\Users\\Lenovo\\.ohos\\config\\default_SmartUtilsPro_zfjcTWix9MpsusUghDVoZvHUzpuNCx7Bz500pYm5af4=.p7b",
+          "signAlg": "SHA256withECDSA",
+          "storeFile": "C:\\Users\\Lenovo\\.ohos\\config\\default_SmartUtilsPro_zfjcTWix9MpsusUghDVoZvHUzpuNCx7Bz500pYm5af4=.p12"
+        }
+      }
+    ],
+    "products": [
+      {
+        "name": "default",
+        "signingConfig": "default",
+        "compatibleSdkVersion": "5.0.0(12)",
+        "runtimeOS": "HarmonyOS",
+      }
+    ],
+    "buildModeSet": [
+      {
+        "name": "debug",
+      },
+      {
+        "name": "release"
+      }
+    ]
+  },
+  "modules": [
+    {
+      "name": "entry",
+      "srcPath": "./entry",
+      "targets": [
+        {
+          "name": "default",
+          "applyToProducts": [
+            "default"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "smart_utils",
+      "srcPath": "./smart_utils",
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "name": "@leo/smart_utils",
+  "version": "0.0.1",
+  "description": "一个智能工具类库，让你少走鸿蒙开发弯路",
+//  "homepage": "https://gitee.com/china-like",
+//  "repository": "https://gitee.com/china-like/xpopup",
+  "main": "Index.ets",
+  "author": "leo2",
+  "license": "Apache-2.0",
+  "dependencies": {},
+  "keywords": [
+    "Util",
+    "Smart",
+    "util",
+    "smart",
+    "HarmonyOS"
+  ],
+  "keywords": [
+    "Util",
+    "Smart",
+    "util",
+    "smart",
+    "HarmonyOS"
+  ]
+}
