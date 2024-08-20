@@ -1,7 +1,5 @@
-import { SmartPermissionUtil } from '@leo2/smart_utils'
-import { ToastUtil } from '@pura/harmony-utils'
+import { ActivityUtil } from '@leo2/smart_utils'
 import { AppRouter } from '../common/AppRouter'
-import { ActivityUtil } from '../util/ActivityUtil'
 
 @Entry
 @Component

@@ -1,4 +1,4 @@
-import { ActivityUtil } from '../util/ActivityUtil';
+import { ActivityUtil } from '@leo2/smart_utils';
 import { AppRouter } from '../common/AppRouter';
 import { MainPage } from './MainPage';
 import { PermissionPage } from './permission/PermissionPage';

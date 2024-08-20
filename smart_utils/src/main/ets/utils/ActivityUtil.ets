@@ -45,8 +45,13 @@
    *
    * 系统的replace方法，替换页面
    ActivityUtil.replacePathByName("SplashPage")
+   *
+   * 获取栈内所有页面
+   ActivityUtil.getAllPagesName()
+   *
+   * 去系统设置页面
+   ActivityUtil.goSystemSettings('packageName')
  * */
-import { On } from '@ohos.UiTest'
 import { common, Want } from '@kit.AbilityKit'
 import { BusinessError } from '@kit.BasicServicesKit'
 
@@ -113,7 +118,6 @@ export class ActivityUtil {
     let pathNameArray = ActivityUtil.getInstance().app!!.getAllPathName()
     pathNameArray.forEach((pathName, index) => {
       if (index != pathNameArray.length - 1) {
-        console.debug("ActivityUtil", "finishAllPagesExceptNewest", pathName)
         ActivityUtil.getInstance().app!!.removeByName(pathName)
       }
     })
@@ -137,7 +141,7 @@ export class ActivityUtil {
     ActivityUtil.getInstance().app!!.replacePathByName(name, param, animated)
   }
 
-  public static getSystemSettings(packageName: string) {
+  public static goSystemSettings(packageName: string) {
     let context: common.UIAbilityContext = getContext() as common.UIAbilityContext
     let wantInfo: Want = {
       bundleName: 'com.huawei.hmos.settings',

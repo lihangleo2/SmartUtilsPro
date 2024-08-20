@@ -17,10 +17,11 @@ ohpm i @leo2/smart_utils
 
 smart_utils全部工具类介绍。[下载完整demo体验](https://github.com/lihangleo2/SmartUtilsPro)
 
-| 模块                       | 介绍     |
-|:-------------------------|:-------|
-| SmartPermissionUtil         | 权限请求框架 |
-| SmartTimer              | 倒计时工具类 |
+| 模块                      | 介绍      |
+|:------------------------|:--------|
+| SmartPermissionUtil     | 权限请求框架  |
+| SmartTimer              | 倒计时工具类  |
+| ActivityUtil            | 页面跳转工具类 |
 
 ## 三 使用
 
@@ -80,7 +81,111 @@ this.codeTimer.resume()
 //6.取消计时
 this.codeTimer.cancle()
 ```
+<br>
 
+### 3.3、ActivityUtil 页面跳转工具类（需使用系统Navigation）
+注意要使用此工具类，必须结合系统的Navigation使用，必须结合系统的Navigation使用，必须结合系统的Navigation使用。
+
+知道这点，那么接下来完成3.3.1和3.3.2就可以使用ActivityUtil工具类
+
++ 3.3.1、第一步，在入口文件初始化
+```typescript
+@Entry
+@Component
+struct Index {
+  @Provide app: NavPathStack = new NavPathStack()
+
+  aboutToAppear(): void {
+    //初始化 NavPathStack
+    ActivityUtil.init(this.app)
+  }
+
+  build() {
+
+    Navigation(this.app) {
+
+    }
+    .hideTitleBar(true)
+    .navDestination(this.navDestinationRouter)
+    .mode(NavigationMode.Stack)
+  }
+
+  @Builder
+  navDestinationRouter(routerName: string, params: Object) {
+    //按系统api的实现，必须实现，否则跳转不正常。有多少页面都要在此实现
+    if (routerName === "MainPage") {
+      MainPage()
+    }
+  }
+}
+```
+
++ 3.3.2、第二步，子页面
+```typescript
+@Entry
+@Component
+export struct MainPage {
+  build() {
+    NavDestination() {
+      Column() {
+        Button('子页面', { type: ButtonType.Capsule, stateEffect: true })
+          .id('button_capsule')
+          .backgroundColor("#ff4063ef")
+          .height('30lpx')
+          .margin({ top: '30lpx' })
+        
+      }
+      .height('100%')
+        .width('100%')
+    }
+    .hideTitleBar(true)
+  }
+}
+```
+
++ 3.3.3、ActivityUtil的使用
+```typescript
+//简单跳转
+ActivityUtil.startActivity("Login")
+  
+//带参数跳转
+ActivityUtil.startActivity("WebViewPage",1)
+  
+//监听上一个页面回调监听
+ActivityUtil.startActivity("WordsPage",item,(popInfo)=>{
+  console.debug("页面回调", 'Pop page name is: ' + popInfo.info.name + ', result: ' + JSON.stringify(popInfo.result))
+})
+
+//关闭页面
+ActivityUtil.finish()
+
+//关闭页面，并传值
+ActivityUtil.finish("数据")
+
+//关闭栈内存在的页面：参数支持一直逗号下去如：ActivityUtil.finishByName("SplashPage","其他页面","其他页面")
+ActivityUtil.finishByName("SplashPage")
+
+//关闭页面，并跳转到指定页面，（如果"Login"在栈内存在，则关闭页面并跳转。如果不存在，则关闭页面并新建Login后跳转）
+ActivityUtil.finishAndStartActivity("Login")
+
+//关闭页面，并跳转到指定页面并传值
+ActivityUtil.finishAndStartActivity("Login","数据")
+
+//关闭栈内所有页面，最新的页面除外
+ActivityUtil.finishAllPagesExceptNewest()
+
+//关闭栈内所有页面，除了参数内的页面:：参数支持一直逗号下去如：ActivityUtil.finishAllPagesExcept("HomePage","其他页面","其他页面")
+ActivityUtil.finishAllPagesExcept("HomePage")
+
+//系统的replace方法，替换页面
+ActivityUtil.replacePathByName("SplashPage")
+
+//获取栈内所有页面
+ActivityUtil.getAllPagesName()
+
+//去系统设置页面，参数为app包名，意思跳转到某个app的系统设置
+ActivityUtil.goSystemSettings('packageName')
+```
 
 ## 📚开源协议
 
