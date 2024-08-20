@@ -100,7 +100,7 @@ List({ space: 20, initialIndex: 0 }) {
         .backgroundColor("#ff7184fc")
         .textAlign(TextAlign.Center)
     }
-  }, (item: WordsBean, index: number) => item + "_" + item.id)
+  }, (item: WordsBean, index: number) => index + "_" + item.id)
 }
 
 
