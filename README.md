@@ -21,6 +21,7 @@ smart_utils全部工具类介绍。[下载完整demo体验](https://github.com/l
 |:------------------------|:--------|
 | SmartPermissionUtil     | 权限请求框架  |
 | SmartTimer              | 倒计时工具类  |
+| SmartDataSource              | 数据懒加载类  |
 | ActivityUtil            | 页面跳转工具类 |
 
 ## 三 使用
@@ -83,12 +84,49 @@ this.codeTimer.cancle()
 ```
 <br>
 
-### 3.3、ActivityUtil 页面跳转工具类（需使用系统Navigation）
+### 3.3、SmartDataSource 数据懒加载类
+```typescript
+//初始化数据
+private listDatas: SmartDataSource<WordsBean> = new SmartDataSource();
+
+//列表控件使用LazyForEach懒加载数据。
+//【特别注意】：如果用到增加和删除改变了index后，index混乱了，要保证index正确，必须重写LazyForEach第三个参数：item + "_" + item.id（只要保证唯一key即可） 
+List({ space: 20, initialIndex: 0 }) {
+  LazyForEach(this.listDatas, (item: WordsBean, index: number) => {
+    ListItem() {
+      Text(`我是列表item == ${item}`)
+        .width('90%')
+        .height(100)
+        .backgroundColor("#ff7184fc")
+        .textAlign(TextAlign.Center)
+    }
+  }, (item: WordsBean, index: number) => item + "_" + item.id)
+}
+
+
+//添加单个数据 / 添加数组数据 addData()支持"单个数据"和"数组"
+this.listDatas.addData("数据")
+  
+//从某个index插入数据，同理支持"数组"
+this.listDatas.addData("数据",index)
+
+//更新某个数据数据 index
+this.listDatas.updateData("数据",index)
+  
+//删除某个数据 index
+this.listDatas.deleteData(index)
+
+//修改数据源datas
+this.listDatas.modifyData(datas)
+```
+<br>
+
+### 3.4、ActivityUtil 页面跳转工具类（需使用系统Navigation）
 注意要使用此工具类，必须结合系统的Navigation使用，必须结合系统的Navigation使用，必须结合系统的Navigation使用。
 
-知道这点，那么接下来完成3.3.1和3.3.2就可以使用ActivityUtil工具类
+知道这点，那么接下来完成3.4.1和3.4.2就可以使用ActivityUtil工具类
 
-+ 3.3.1、第一步，在入口文件初始化
++ 3.4.1、第一步，在入口文件初始化
 ```typescript
 @Entry
 @Component
@@ -120,7 +158,7 @@ struct Index {
 }
 ```
 
-+ 3.3.2、第二步，子页面
++ 3.4.2、第二步，子页面
 ```typescript
 @Entry
 @Component
@@ -143,14 +181,14 @@ export struct MainPage {
 }
 ```
 
-+ 3.3.3、ActivityUtil的使用
++ 3.4.3、ActivityUtil的使用
 ```typescript
 //简单跳转
 ActivityUtil.startActivity("Login")
-  
+
 //带参数跳转
 ActivityUtil.startActivity("WebViewPage",1)
-  
+
 //监听上一个页面回调监听
 ActivityUtil.startActivity("WordsPage",item,(popInfo)=>{
   console.debug("页面回调", 'Pop page name is: ' + popInfo.info.name + ', result: ' + JSON.stringify(popInfo.result))
