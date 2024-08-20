@@ -11,3 +11,8 @@
 
 + SmartPermissionUtil，权限请求工具类
 + SmartTimer，倒计时工具类
+
+## 0.0.2
+
++ SmartTimer的使用案例完善
++ 完善主页项目demo体验
