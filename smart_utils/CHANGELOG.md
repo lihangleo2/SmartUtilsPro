@@ -14,5 +14,6 @@
 
 ## 0.0.2
 
++ ActivityUtil，页面跳转工具类
 + SmartTimer的使用案例完善
 + 完善主页项目demo体验
