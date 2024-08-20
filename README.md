@@ -17,12 +17,12 @@ ohpm i @leo2/smart_utils
 
 smart_utils全部工具类介绍。[下载完整demo体验](https://github.com/lihangleo2/SmartUtilsPro)
 
-| 模块                      | 介绍      |
-|:------------------------|:--------|
-| SmartPermissionUtil     | 权限请求框架  |
-| SmartTimer              | 倒计时工具类  |
-| SmartDataSource              | 数据懒加载类  |
-| ActivityUtil            | 页面跳转工具类 |
+| 模块                  | 介绍      |
+|:--------------------|:--------|
+| SmartPermissionUtil | 权限请求框架  |
+| SmartTimer          | 倒计时工具类  |
+| SmartDataSource     | 数据懒加载类  |
+| ActivityUtil        | 页面跳转工具类 |
 
 ## 三 使用
 
