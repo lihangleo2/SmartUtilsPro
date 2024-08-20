@@ -15,7 +15,7 @@ ohpm i @leo2/smart_utils
 
 ## 二 API介绍
 
-smart_utils全部工具类介绍
+smart_utils全部工具类介绍。[下载完整demo体验](https://github.com/lihangleo2/SmartUtilsPro)
 
 | 模块                       | 介绍     |
 |:-------------------------|:-------|
