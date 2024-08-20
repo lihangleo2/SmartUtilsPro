@@ -1,6 +1,9 @@
 {
   "src": [
-    "pages/Index"
+    "pages/Index",
+    "pages/MainPage",
+    "pages/permission/PermissionPage",
+    "pages/timer/TimerPage"
   ],
   "window": {
     "designWidth": 375,

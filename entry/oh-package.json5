@@ -5,6 +5,10 @@
   "main": "",
   "author": "",
   "license": "",
-  "dependencies": {}
+  "dependencies": {
+    "@leo2/smart_utils": "file:../smart_utils",
+    "@pura/harmony-utils": "^1.0.6"
+  },
+  "devDependencies": {},
+  "dynamicDependencies": {}
 }
-

@@ -47,6 +47,20 @@
           }
         ],
       }
+    ],
+    "requestPermissions": [
+      {
+        //配置申请网络权限
+        "name": "ohos.permission.INTERNET",
+      },
+      {
+        //相机权限
+        "name": "ohos.permission.CAMERA",
+        "reason": "$string:app_camera_reson",
+        "usedScene": {
+          "when": "always"
+        }
+      }
     ]
   }
 }

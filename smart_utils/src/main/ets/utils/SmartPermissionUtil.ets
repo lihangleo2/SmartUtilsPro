@@ -2,7 +2,7 @@ import { abilityAccessCtrl, Permissions } from '@kit.AbilityKit';
 
 /*
  * 使用案例
-     MyPermissionUtil.requestPermissions('ohos.permission.CAMERA', 'ohos.permission.MICROPHONE')//参数支持一直往后加
+     SmartPermissionUtil.requestPermissions('ohos.permission.CAMERA', 'ohos.permission.MICROPHONE')//参数支持一直往后加
       .subscribe(() => {
         //全部权限请求成功回调
 

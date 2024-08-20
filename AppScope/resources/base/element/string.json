@@ -3,6 +3,10 @@
     {
       "name": "app_name",
       "value": "SmartUtilsPro"
+    },
+    {
+      "name": "app_camera_reson",
+      "value": "请求相机权限录制"
     }
   ]
 }

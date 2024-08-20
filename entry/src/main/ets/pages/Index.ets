@@ -1,20 +1,37 @@
+import { ActivityUtil } from '../util/ActivityUtil';
+import { AppRouter } from '../common/AppRouter';
+import { MainPage } from './MainPage';
+import { PermissionPage } from './permission/PermissionPage';
+import { TimerPage } from './timer/TimerPage';
+
 @Entry
 @Component
 struct Index {
-  @State message: string = 'Hello World';
+  @Provide app: NavPathStack = new NavPathStack()
+
+  aboutToAppear(): void {
+    ActivityUtil.init(this.app)
+    ActivityUtil.replacePathByName(AppRouter.activity_main)
+  }
 
   build() {
-    RelativeContainer() {
-      Text(this.message)
-        .id('HelloWorld')
-        .fontSize(50)
-        .fontWeight(FontWeight.Bold)
-        .alignRules({
-          center: { anchor: '__container__', align: VerticalAlign.Center },
-          middle: { anchor: '__container__', align: HorizontalAlign.Center }
-        })
+
+    Navigation(this.app) {
+
     }
-    .height('100%')
-    .width('100%')
+    .hideTitleBar(true)
+    .navDestination(this.navDestinationRouter)
+    .mode(NavigationMode.Stack)
+  }
+
+  @Builder
+  navDestinationRouter(routerName: string, params: Object) {
+    if (routerName === AppRouter.activity_main) {
+      MainPage()
+    } else if (routerName === AppRouter.activity_permission) {
+      PermissionPage()
+    }else if (routerName === AppRouter.activity_timer) {
+      TimerPage()
+    }
   }
 }
