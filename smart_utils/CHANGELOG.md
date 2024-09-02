@@ -1,6 +1,6 @@
 # 版本记录
 
-[//]: # (## 0.0.2)
+[//]: # (## 0.0.3)
 
 [//]: # ()
 [//]: # (+ 新增弹窗属性方法)
@@ -18,3 +18,8 @@
 + 新增数据懒加载类，SmartDataSource
 + 完善SmartTimer的使用案例
 + 完善主页项目demo体验
+
+## 0.0.3
+
++ 更新SmartDataSource文档
++ ActivityUtil改为系统pushPath

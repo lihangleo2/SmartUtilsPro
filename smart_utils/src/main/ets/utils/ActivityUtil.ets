@@ -9,18 +9,47 @@
   }
 }
 
+
  *
- * 简单跳转
-   ActivityUtil.startActivity("Login")
- *
- * 带参数跳转
-   ActivityUtil.startActivity("WebViewPage",1)
- *
- * 监听上一个页面回调监听
-   ActivityUtil.startActivity("WordsPage",item,(popInfo)=>{
-      console.debug("页面回调", 'Pop page name is: ' + popInfo.info.name + ', result: ' + JSON.stringify(popInfo.result))
+ * 跳转相关
+   ActivityUtil.startActivity({
+     name: 'Login', //跳转页面name (必填)
+     param: 1, //跳转是否带参数 (非必填)
+     launchMode: LaunchMode.POP_TO_SINGLETON, //跳转是否带启动模式 (非必填)
+     animated: true, //是否带跳转动画 (非必填)
+     onPop: (popInfo) => { //监听上一个页面回调监听(非必填)
+        console.debug("页面回调", 'Pop page name is: ' + popInfo.info.name + ', result: ' + JSON.stringify(popInfo.result))
+     }
    })
 
+ * 使用提示：
+   1.你只需要ActivityUtil.startActivity({})就会有代码提示，其中name为必填项，会主动生成。其他根据需要写入可参考如下：
+    interface ActivityInfo{
+      //跳转name (必填)
+      name: string
+
+      //跳转参数 (非必填)
+      param?: Object | null
+
+      //启动模式 (非必填)
+      launchMode?: LaunchMode
+
+      //是否带跳转动画 (非必填)
+      animated?: boolean;
+
+      //跳转监听，如：A跳B，A监听B回来 (非必填)
+      onPop?: (popInfo: PopInfo) => void
+    }
+
+   2.启动模式详解
+   * LaunchMode.STANDARD: 默认启动模式，开启几个就有几个
+   * LaunchMode.MOVE_TO_TOP_SINGLETON: 从栈底向栈顶查找，如果指定的名称已经存在，则将对应的NavDestination页面移到栈顶
+   * LaunchMode.POP_TO_SINGLETON: 从栈底向栈顶查找，如果指定的名称已经存在，则将其上方的NavDestination页面全部移除
+   * LaunchMode.NEW_INSTANCE: 测试下来和STANDARD模式效果一致，栈内都打印出来多个了。（android里也会多个，但会新建栈，仅供参考）
+   *                          以下是官方注释：创建新的NavDestination实例。与STANDARD模式相比，该方法不会复用栈中同名实例。
+
+   * *******************************************************************************************************************
+   *
    *
    * 关闭页面
    ActivityUtil.finish()
@@ -32,10 +61,15 @@
    ActivityUtil.finishByName("SplashPage")
    *
    * 关闭页面，并跳转到指定页面，（如果"Login"在栈内存在，则关闭页面并跳转。如果不存在，则关闭页面并新建Login后跳转）
-   ActivityUtil.finishAndStartActivity("Login")
+   ActivityUtil.finishAndStartActivity({
+      name: 'Login'
+   })
    *
    * 关闭页面，并跳转到指定页面并传值
-   ActivityUtil.finishAndStartActivity("Login","数据")
+   ActivityUtil.finishAndStartActivity({
+      name: 'Login',
+      param: "数据"
+   })
    *
    * 关闭栈内所有页面，最新的页面除外
    ActivityUtil.finishAllPagesExceptNewest()
@@ -81,28 +115,27 @@ export class ActivityUtil {
     return ActivityUtil.instance
   }
 
-  public static startActivity(name: string, param?: Object | null, onPop?: (popInfo: PopInfo) => void,
-    animated?: boolean) {
-    if (onPop == undefined) {
-      ActivityUtil.getInstance().app?.pushPathByName(name, param, animated)
-    } else {
-      ActivityUtil.getInstance().app?.pushPathByName(name, param, onPop, animated)
-    }
+  public static startActivity(activityInfo:ActivityInfo) {
+    ActivityUtil.getInstance().app?.pushPath(new NavPathInfo(activityInfo.name, activityInfo.param, activityInfo.onPop), { launchMode: activityInfo.launchMode,animated:activityInfo.animated })
   }
+
+
 
   public static finish(param?: Object | null, animated?: boolean) {
     ActivityUtil.getInstance().app?.pop(param, animated)
   }
 
-  public static finishAndStartActivity(name: string, param?: Object | null, animated?: boolean) {
+  public static finishAndStartActivity(activityInfo:ActivityInfo) {
     let pathNameArray = ActivityUtil.getInstance().app!!.getAllPathName()
+    let name = activityInfo.name
     if (pathNameArray.includes(name)) {
       //存在值就用popToName
-      ActivityUtil.getInstance().app!!.popToName(name, param, animated)
+      ActivityUtil.getInstance().app!!.popToName(name, activityInfo.param, activityInfo.animated)
     } else {
       ActivityUtil.getInstance().app?.pop()
-      //不存在popToName api会失效，那么改用pushPathByName
-      ActivityUtil.getInstance().app?.pushPathByName(name, param, animated)
+      //不存在popToName api会失效，那么改用pushPath
+      // ActivityUtil.getInstance().app?.pushPath(new NavPathInfo(name, param), options)
+      ActivityUtil.getInstance().app?.pushPath(new NavPathInfo(name, activityInfo.param,activityInfo.onPop), { launchMode: activityInfo.launchMode,animated:activityInfo.animated })
     }
 
   }
@@ -118,6 +151,7 @@ export class ActivityUtil {
     let pathNameArray = ActivityUtil.getInstance().app!!.getAllPathName()
     pathNameArray.forEach((pathName, index) => {
       if (index != pathNameArray.length - 1) {
+        console.debug("ActivityUtil", "finishAllPagesExceptNewest", pathName)
         ActivityUtil.getInstance().app!!.removeByName(pathName)
       }
     })
@@ -159,3 +193,22 @@ export class ActivityUtil {
     })
   }
 }
+
+
+interface ActivityInfo{
+  //跳转name
+  name: string
+
+  //跳转参数
+  param?: Object | null
+
+  //跳转监听，如：A跳B，A监听B回来
+  onPop?: (popInfo: PopInfo) => void
+
+  //启动模式
+  launchMode?: LaunchMode
+
+  //是否带跳转动画
+  animated?: boolean;
+}
+
