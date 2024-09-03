@@ -1,6 +1,6 @@
 # 版本记录
 
-[//]: # (## 0.0.3)
+[//]: # (## 0.0.4)
 
 [//]: # ()
 [//]: # (+ 新增弹窗属性方法)
@@ -23,4 +23,7 @@
 
 + 更新SmartDataSource文档
 + ActivityUtil改为系统pushPath
-+ 新增检查更新工具类AppUpdateUtil
+
+## 0.0.4
+
++ 新增版本更新工具类AppUpdateUtil

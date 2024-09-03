@@ -23,7 +23,7 @@ smart_utils全部工具类介绍。[下载完整demo体验](https://github.com/l
 | SmartTimer              | 倒计时工具类  |
 | SmartDataSource              | 数据懒加载类  |
 | ActivityUtil            | 页面跳转工具类 |
-| AppUpdateUtil            | 检查更新工具类 |
+| AppUpdateUtil            | 版本更新工具类 |
 
 ## 三 使用
 
@@ -91,7 +91,7 @@ this.codeTimer.cancle()
 private listDatas: SmartDataSource<WordsBean> = new SmartDataSource();
 
 //列表控件使用LazyForEach懒加载数据。
-//【特别注意】：如果用到增加和删除改变了index后，index混乱了，要保证index正确，必须重写LazyForEach第三个参数：item + "_" + item.id（只要保证唯一key即可） 
+//【特别注意】：如果用到增加和删除改变了index后，index混乱了，要保证index正确，必须重写LazyForEach第三个参数：index + "_" + item.id（只要保证唯一key即可） 
 List({ space: 20, initialIndex: 0 }) {
   LazyForEach(this.listDatas, (item: WordsBean, index: number) => {
     ListItem() {
@@ -184,15 +184,15 @@ export struct MainPage {
 
 + 3.4.3、ActivityUtil的使用
 ```typescript
-//简单跳转
-ActivityUtil.startActivity("Login")
-  
-//带参数跳转
-ActivityUtil.startActivity("WebViewPage",1)
-  
-//监听上一个页面回调监听
-ActivityUtil.startActivity("WordsPage",item,(popInfo)=>{
-  console.debug("页面回调", 'Pop page name is: ' + popInfo.info.name + ', result: ' + JSON.stringify(popInfo.result))
+//跳转相关
+ActivityUtil.startActivity({
+  name: 'Login', //跳转页面name (必填)
+  param: 1, //跳转是否带参数 (非必填)
+  launchMode: LaunchMode.POP_TO_SINGLETON, //跳转是否带启动模式 (非必填)
+  animated: true, //是否带跳转动画 (非必填)
+  onPop: (popInfo) => { //监听上一个页面回调监听(非必填)
+    console.debug("页面回调", 'Pop page name is: ' + popInfo.info.name + ', result: ' + JSON.stringify(popInfo.result))
+  }
 })
 
 //关闭页面

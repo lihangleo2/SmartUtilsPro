@@ -1,5 +1,5 @@
 
-# <center>smart-utils (API12 - Dev: 5.0.3.706)</center>
+# <center>smart-utils (API12 - Dev: 5.0.3.600)</center>
 
 一个智能的常用工具类库，让你少走鸿蒙开发弯路。
 
@@ -17,12 +17,13 @@ ohpm i @leo2/smart_utils
 
 smart_utils全部工具类介绍。[下载完整demo体验](https://github.com/lihangleo2/SmartUtilsPro)
 
-| 模块                  | 介绍      |
-|:--------------------|:--------|
-| SmartPermissionUtil | 权限请求框架  |
-| SmartTimer          | 倒计时工具类  |
-| SmartDataSource     | 数据懒加载类  |
-| ActivityUtil        | 页面跳转工具类 |
+| 模块                      | 介绍      |
+|:------------------------|:--------|
+| SmartPermissionUtil     | 权限请求框架  |
+| SmartTimer              | 倒计时工具类  |
+| SmartDataSource              | 数据懒加载类  |
+| ActivityUtil            | 页面跳转工具类 |
+| AppUpdateUtil            | 版本更新工具类 |
 
 ## 三 使用
 
@@ -204,15 +205,10 @@ ActivityUtil.finish("数据")
 ActivityUtil.finishByName("SplashPage")
 
 //关闭页面，并跳转到指定页面，（如果"Login"在栈内存在，则关闭页面并跳转。如果不存在，则关闭页面并新建Login后跳转）
-ActivityUtil.finishAndStartActivity({
-  name: 'Login'
-})
+ActivityUtil.finishAndStartActivity("Login")
 
 //关闭页面，并跳转到指定页面并传值
-ActivityUtil.finishAndStartActivity({
-  name: 'Login',
-  param: "数据"
-})
+ActivityUtil.finishAndStartActivity("Login","数据")
 
 //关闭栈内所有页面，最新的页面除外
 ActivityUtil.finishAllPagesExceptNewest()
@@ -228,6 +224,22 @@ ActivityUtil.getAllPagesName()
 
 //去系统设置页面，参数为app包名，意思跳转到某个app的系统设置
 ActivityUtil.goSystemSettings('packageName')
+```
+<br>
+
+### 3.5、AppUpdateUtil 版本更新工具类
+本版本工薪库，是基于系统上二次封装。如果用户已上架华为市场，是会弹系统更新弹窗跳转华为市场的
+```typescript
+//最简单使用
+AppUpdateUtil.checkAppUpdate()
+  
+//考虑用户体验，因为checkAppUpdate属于异步操作，最好是展示loading,这里也有封装  
+AppUpdateUtil.checkAppUpdate(()=>{
+  //在这里做showLoading操作
+},()=>{
+  //在这里做hideLoading操作
+})  
+
 ```
 
 ## 📚开源协议
