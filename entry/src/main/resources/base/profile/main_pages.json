@@ -3,7 +3,8 @@
     "pages/Index",
     "pages/MainPage",
     "pages/permission/PermissionPage",
-    "pages/timer/TimerPage"
+    "pages/timer/TimerPage",
+    "pages/appupdate/UpdatePage"
   ],
   "window": {
     "designWidth": 375,

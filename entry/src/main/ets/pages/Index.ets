@@ -1,5 +1,6 @@
 import { ActivityUtil } from '@leo2/smart_utils';
 import { AppRouter } from '../common/AppRouter';
+import { UpdatePage } from './appupdate/UpdatePage';
 import { MainPage } from './MainPage';
 import { PermissionPage } from './permission/PermissionPage';
 import { TimerPage } from './timer/TimerPage';
@@ -32,6 +33,8 @@ struct Index {
       PermissionPage()
     }else if (routerName === AppRouter.activity_timer) {
       TimerPage()
+    }else if (routerName === AppRouter.activity_update) {
+      UpdatePage()
     }
   }
 }

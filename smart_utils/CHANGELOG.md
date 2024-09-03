@@ -23,3 +23,4 @@
 
 + 更新SmartDataSource文档
 + ActivityUtil改为系统pushPath
++ 新增检查更新工具类AppUpdateUtil

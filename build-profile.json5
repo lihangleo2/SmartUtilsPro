@@ -6,9 +6,9 @@
         "type": "HarmonyOS",
         "material": {
           "certpath": "C:\\Users\\Lenovo\\.ohos\\config\\default_SmartUtilsPro_rNUfiLsSaeHu8MqAAMe3jZGDT1fuXZEeOEZ-FBJlAWo=.cer",
-          "storePassword": "0000001BDC58159062863F73C2A6AACD777BC7586B742E48737683476B858C6875BCE7F04DC300F7D10F45",
+          "storePassword": "00000019D3E94BB8A3DFFF014E117273DE7EF9F246CC7C721376E4429097849D3B03DE2B0D4681121E",
           "keyAlias": "debugKey",
-          "keyPassword": "0000001BA976FEF58D7E2D6C2A6C55BA9300395A76A2BC26600676C2EB2B747F6C546818434F9774F6CB90",
+          "keyPassword": "00000019532DA981075B5BF9747551556A14A9B2D90200C4E8D5DA2ABAE93C0C479A2B3B613718656C",
           "profile": "C:\\Users\\Lenovo\\.ohos\\config\\default_SmartUtilsPro_rNUfiLsSaeHu8MqAAMe3jZGDT1fuXZEeOEZ-FBJlAWo=.p7b",
           "signAlg": "SHA256withECDSA",
           "storeFile": "C:\\Users\\Lenovo\\.ohos\\config\\default_SmartUtilsPro_rNUfiLsSaeHu8MqAAMe3jZGDT1fuXZEeOEZ-FBJlAWo=.p12"

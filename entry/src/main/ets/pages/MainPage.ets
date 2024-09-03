@@ -16,7 +16,9 @@ export struct MainPage {
           .height('30lpx')
           .margin({ top: '30lpx' })
           .onClick(() => {
-            ActivityUtil.startActivity(AppRouter.activity_permission)
+            ActivityUtil.startActivity({
+              name: AppRouter.activity_permission
+            })
           })
 
         /*
@@ -28,8 +30,25 @@ export struct MainPage {
           .height('30lpx')
           .margin({ top: '30lpx' })
           .onClick(() => {
-            ActivityUtil.startActivity(AppRouter.activity_timer)
+            ActivityUtil.startActivity({
+              name: AppRouter.activity_timer
+            })
           })
+
+        /*
+         * 跳转检查更新
+         * */
+        Button('检查更新', { type: ButtonType.Capsule, stateEffect: true })
+          .id('button_capsule')
+          .backgroundColor("#ff4063ef")
+          .height('30lpx')
+          .margin({ top: '30lpx' })
+          .onClick(() => {
+            ActivityUtil.startActivity({
+              name: AppRouter.activity_update
+            })
+          })
+
       }
       .height('100%')
       .width('100%')

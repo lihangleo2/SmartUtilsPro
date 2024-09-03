@@ -4,5 +4,6 @@ export class AppRouter{
    static readonly  activity_main = "MainPage"
    static readonly  activity_permission = "PermissionPage"
    static readonly  activity_timer = "TimerPage"
+   static readonly  activity_update = "UpdatePage"
 }
 
